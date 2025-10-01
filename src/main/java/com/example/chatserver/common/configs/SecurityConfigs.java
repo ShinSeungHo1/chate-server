@@ -31,7 +31,7 @@ public class SecurityConfigs {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))// localhost:8080 localhost:3000 이렇게 도메인이 다르면 통신이 안됨... cors에 예외적으로 3000번을 허용해줄게! 라고 하면 된다.
                 .csrf(AbstractHttpConfigurer::disable) // csrf 비활성화
                 .httpBasic(AbstractHttpConfigurer::disable) // Http basic 비활성화
-                .authorizeHttpRequests(a -> a.requestMatchers("/member/create", "member/doLogin").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(a -> a.requestMatchers("/member/create", "member/doLogin", "/connect").permitAll().anyRequest().authenticated())
                 // matches 안에 있는 url 패턴에 대해서는 Authentication 객체 요구하지 않음.(인증처리 제외)
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 방식 사용하지 않겠다.
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
